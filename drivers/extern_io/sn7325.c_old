@@ -1,0 +1,180 @@
+/* 
+ * sn7325 i2c interface
+ * Copyright (C) 2010 Amlogic, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the named License,
+ * or any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA
+ *
+ * Author:  elvis yu<elvis.yu@amlogic.com>
+ */  
+
+#include <asm/arch/pinmux.h>
+#include <asm/arch/gpio.h>
+#include <asm/arch/i2c.h>
+#include <aml_i2c.h>
+#include <sn7325.h>
+
+
+//#define __DBG__
+#ifdef __DBG__
+#define debug(fmt,args...) do { printf("[DEBUG]: FILE:%s:%d, FUNC:%s--- "fmt"\n",\
+                                                     __FILE__,__LINE__,__func__,## args);} \
+                                         while (0)
+#else
+#define debug(fmt,args...)
+#endif
+
+void    sn7325_init()
+{
+    debug("sn7325 reset, address=0x%x", SN7325_ADDR);
+    sn7325_pwr_rst();
+}
+
+static int sn7325_i2c_read(unsigned char *buff, unsigned len)
+{
+    int res = 0;
+    struct i2c_msg msgs[] = {
+        {
+            .addr = SN7325_ADDR,
+            .flags = 0,
+            .len = 1,
+            .buf = buff,
+        },
+        {
+            .addr = SN7325_ADDR,
+            .flags = I2C_M_RD,
+            .len = len,
+            .buf = buff,
+        }
+    };
+
+    res = aml_i2c_xfer(msgs, 2);
+    if (res < 0) {
+        printf("%s: i2c transfer failed\n", __FUNCTION__);
+    }
+
+    return res;
+}
+
+static int sn7325_i2c_write(unsigned char *buff, unsigned len)
+{
+    int res = 0;
+    struct i2c_msg msg[] = {
+        {
+        .addr = SN7325_ADDR,
+        .flags = 0,
+        .len = len,
+        .buf = buff,
+        }
+    };
+
+    res = aml_i2c_xfer( msg, 1);
+    if (res < 0) {
+        printf("%s: i2c transfer failed\n", __FUNCTION__);
+    }
+
+    return res;
+}
+
+unsigned char get_configIO(unsigned char port)
+{
+    unsigned char ioconf = 0;
+
+    switch(port)
+    {
+        case 0:
+        case 1:
+            ioconf = 0x4+port;
+            sn7325_i2c_read(&ioconf, 1);
+            break;
+    }
+
+    return ioconf;
+}
+
+int configIO(unsigned char port, unsigned char ioflag)
+{
+    int res = 0;
+    unsigned char buff_data[2];
+
+    switch(port)
+    {
+        case 0:
+        case 1:
+            buff_data[0] = 0x4+port;
+            buff_data[1] = ioflag;
+            res = sn7325_i2c_write(buff_data, 2);
+            break;
+    }
+
+    return res;
+}
+
+static unsigned char getIOport_level(unsigned char port)
+{
+    unsigned char iobits = port;
+
+    switch(port)
+    {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            sn7325_i2c_read(&iobits, 1);
+            break;
+    }
+
+    return iobits;
+}
+
+unsigned char getIObit_level(unsigned char port, unsigned char offset)
+{
+    unsigned char iobits = 0;
+    unsigned char ioConfig = 0;
+
+    switch( port )
+    {
+        case 0:
+        case 1:
+            ioConfig = get_configIO(port);
+            if ((iobits>>offset) & 1)
+                iobits = port;
+            else
+                iobits += 2;
+            sn7325_i2c_read(&iobits, 1);
+            break;
+    }
+
+    return (iobits>>offset) & 1;
+}
+
+int setIO_level(unsigned char port, unsigned char iobits, unsigned char offset)
+{
+    int res = 0;
+    unsigned char buff_data[2];
+    unsigned char ioflag = 0;
+
+    switch( port )
+    {
+        case 0:
+        case 1:
+            ioflag = getIOport_level(port+0x2);
+            buff_data[0] = 0x2+port;
+            buff_data[1] = iobits? (ioflag | (1<<offset)):(ioflag & (~(1<<offset)));
+            res = sn7325_i2c_write(buff_data, 2);
+            break;
+    }
+
+    return res;
+}

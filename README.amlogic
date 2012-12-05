@@ -1,0 +1,79 @@
+
+1 Debugrom Howto ...
+	1.  files
+			You can put below files into $(BOARDDIR)/firmware , $(SOCDIR)/firmware , $(CPUDIR)/common/firmware
+			debugrom.c 
+				debugrom main functions
+			spl.c 
+				second program loader main source .
+ 			ddr.c 
+ 				ddr initial source .
+ 			lowlevel_init.c
+ 				lowlevel initial source .
+ 			memtest.c  
+ 				memory test function 
+ 			relocate_init.c  
+ 				load u boot functions 
+ 			sdio.c  
+ 				load u boot from sd card functions
+ 			serial.c  
+ 				serial functions
+ 			spiwrite.c  
+ 				spi functions .
+ 			timer.c  
+ 				timer relative functions .
+ 			pinmux.c  
+ 				board relative pinmux 
+ 			pll.c  
+ 				pll setting 
+ 			romboot.c  
+ 				power on config setting parser functions.
+ 			timming.c  
+ 				timming settings .
+ 			uartpin.c  
+ 				uart settings .
+ 				
+ 	2 Compile 
+ 		You can compile Debugrom with  armcc by putting 
+ 			#define CONFIG_ENABLE_ARMCC_DEBUGROM 1 
+ 		into your config files
+ 		and install rvds in your compiler machine .
+ 		
+ 		
+ 		The advantage of armcc is the code size is very small . We can obtain more
+ 		powerful spl or debugrom .
+ 		
+ 		compile command :
+ 			gmake <board config>
+ 			gmake firmware // we can get firmware and spl only .
+ 			
+ 3 usage
+ 		if booting fail , or you booting the debugrom bin , you can enter debugrom mode
+ 		in this mode , you can test some basic hardware parameters .
+ 		another condition is you enter a key within 100ms .
+ 		
+ 		
+		w:  write memory or register
+      	w 80000000 1
+    r:  read memory  or register
+        r c1107d54
+    q:  quit
+		P:  init plls 
+    S: show the addr of parameters addr .
+    M: init memory and do some testing     
+        
+    B: setting start command .
+        B "r c1107d54"
+    s: save debugrom to spi flash .
+    
+2 Add make help 
+	Every boad can put a Readme.mk please take a look at 
+	board/amlogic/m2_socket_v1/Readme.mk 
+	
+	Then we can obtain make help command .
+	it will show you the configs we can use .
+
+	
+     
+     
+ 		

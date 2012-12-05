@@ -1,0 +1,35 @@
+#!/bin/sh
+# Print additional version information for non-release trees.
+
+usage() {
+	echo "Usage: $0 [srctree]" >&2
+	exit 1
+}
+
+cd "${1:-.}" || usage
+
+# Check for git and a git repo.
+if head=`git rev-parse --verify HEAD 2>/dev/null`; then
+        # Do we have an untagged version?
+        if git name-rev --tags HEAD | \
+           grep -E '^HEAD[[:space:]]+(.*~[0-9]*|undefined)$' > /dev/null; then 
+           VN=$(git describe HEAD 2>/dev/null)
+           case "$VN" in
+           $LF) (exit 1) ;;
+           v[0-9]*)
+                git update-index -q --refresh
+                test -z "$(git diff-index --name-only HEAD --)" ||
+                VN="$VN-mod" ;;
+           esac
+           printf '%s' $VN
+        fi
+fi
+
+# Check for svn and a svn repo.
+if rev=`svn info 2>/dev/null` ; then
+	rev=`echo "${rev}" | grep '^Last Changed Rev' | awk '{print $NF}'`
+	printf -- '-svn%s' $rev
+fi
+
+# Check for any localversion-* files
+printf '%s' "`cat localversion-* 2>/dev/null`"

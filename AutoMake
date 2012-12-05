@@ -1,0 +1,7 @@
+FIRMWARE_AUTO_UPDATE=y
+export FIRMWARE_AUTO_UPDATE
+all:
+	echo compiling firmware .......
+	make -f ./Makefile.firmware
+	echo compiling uboot ......
+	make all

@@ -1,0 +1,250 @@
+#ifdef DDR_PCTL
+#else
+
+#define DDR_PCTL
+#define PCTL_SCFG_ADDR 				0x000
+#define PCTL_SCTL_ADDR 				0x004
+#define PCTL_STAT_ADDR 				0x008
+#define PCTL_MCMD_ADDR 				0x040
+#define PCTL_POWCTL_ADDR 			0x044
+#define PCTL_POWSTAT_ADDR 			0x048
+#define PCTL_MCFG_ADDR 				0x080
+#define PCTL_PPCFG_ADDR 			0x084
+#define PCTL_MSTAT_ADDR 			0x088
+#define PCTL_ODTCFG_ADDR 			0x08c
+#define PCTL_DQSECFG_ADDR 			0x090
+#define PCTL_DTUPDES_ADDR 			0x094
+#define PCTL_DTUNA_ADDR 			0x098
+#define PCTL_DTUNE_ADDR 			0x09c
+#define PCTL_DTUPRD0_ADDR 			0x0a0
+#define PCTL_DTUPRD1_ADDR 			0x0a4
+#define PCTL_DTUPRD2_ADDR 			0x0a8
+#define PCTL_DTUPRD3_ADDR 			0x0ac
+#define PCTL_DTUAWDT_ADDR 			0x0b0
+#define PCTL_TOGCNT1U_ADDR 			0x0c0
+#define PCTL_TINIT_ADDR 			0x0c4
+#define PCTL_TRSTH_ADDR 			0x0c8
+#define PCTL_TOGCNT100N_ADDR 		0x0cc
+#define PCTL_TREFI_ADDR 			0x0d0
+#define PCTL_TMRD_ADDR 				0x0d4
+#define PCTL_TRFC_ADDR 				0x0d8
+#define PCTL_TRP_ADDR 				0x0dc
+#define PCTL_TRTW_ADDR 				0x0e0 //aa
+#define PCTL_TAL_ADDR 				0x0e4
+#define PCTL_TCL_ADDR 				0x0e8
+#define PCTL_TCWL_ADDR 				0x0ec
+#define PCTL_TRAS_ADDR 				0x0f0
+#define PCTL_TRC_ADDR 				0x0f4
+#define PCTL_TRCD_ADDR 				0x0f8
+#define PCTL_TRRD_ADDR 				0x0fc
+#define PCTL_TRTP_ADDR 				0x100
+#define PCTL_TWR_ADDR 				0x104
+#define PCTL_TWTR_ADDR 				0x108
+#define PCTL_TEXSR_ADDR 			0x10c
+#define PCTL_TXP_ADDR 				0x110
+#define PCTL_TXPDLL_ADDR 			0x114 //aa
+#define PCTL_TZQCS_ADDR 			0x118 //aa
+#define PCTL_TZQCSI_ADDR 			0x11c //aa
+#define PCTL_TDQS_ADDR 				0x120 
+#define PCTL_TCKSRE_ADDR 			0x124
+#define PCTL_TCKSRX_ADDR 			0x128
+#define PCTL_TCKE_ADDR 				0x12c
+#define PCTL_TMOD_ADDR 				0x130
+#define PCTL_TRSTL_ADDR 			0x134
+#define PCTL_TZQCL_ADDR 			0x138
+#define PCTL_DWLCFG0_ADDR 			0x170
+#define PCTL_DWLCFG1_ADDR 			0x174
+#define PCTL_DWLCFG2_ADDR 			0x178
+#define PCTL_DWLCFG3_ADDR 			0x17c
+#define PCTL_ECCCFG_ADDR 			0x180
+#define PCTL_ECCTST_ADDR 			0x184
+#define PCTL_ECCCLR_ADDR 			0x188
+#define PCTL_ECCLOG_ADDR 			0x18c
+#define PCTL_ADDRMAP_ADDR 			0x1c0
+#define PCTL_IDDEC0_ADDR 			0x1c4
+#define PCTL_IDDEC1_ADDR 			0x1c8
+#define PCTL_DTUWACTL_ADDR 			0x200
+#define PCTL_DTURACTL_ADDR 			0x204
+#define PCTL_DTUCFG_ADDR 			0x208
+#define PCTL_DTUECTL_ADDR 			0x20c
+#define PCTL_DTUWD0_ADDR 			0x210
+#define PCTL_DTUWD1_ADDR 			0x214
+#define PCTL_DTUWD2_ADDR 			0x218
+#define PCTL_DTUWD3_ADDR 			0x21c
+#define PCTL_DTUWDM_ADDR 			0x220
+#define PCTL_DTURD0_ADDR 			0x224
+#define PCTL_DTURD1_ADDR 			0x228
+#define PCTL_DTURD2_ADDR 			0x22c
+#define PCTL_DTURD3_ADDR 			0x230
+#define PCTL_DTULFSRWD_ADDR 		0x234
+#define PCTL_DTULFSRRD_ADDR 		0x238
+#define PCTL_DTUEAF_ADDR 			0x23c
+#define PCTL_PHYCR_ADDR 			0x240
+#define PCTL_PHYSR_ADDR 			0x244
+#define PCTL_IOCR_ADDR 				0x248
+#define PCTL_RSLR0_ADDR 			0x24c
+#define PCTL_RSLR1_ADDR 			0x250
+#define PCTL_RSLR2_ADDR 			0x254
+#define PCTL_RSLR3_ADDR 			0x258
+#define PCTL_RDGR0_ADDR 			0x25c
+#define PCTL_RDGR1_ADDR 			0x260
+#define PCTL_RDGR2_ADDR 			0x264
+#define PCTL_RDGR3_ADDR 			0x268
+#define PCTL_ZQCR_ADDR 				0x26c
+#define PCTL_ZQSR_ADDR 				0x270
+#define PCTL_DLLCR_ADDR 			0x280
+#define PCTL_DLLCR0_ADDR 			0x284
+#define PCTL_DLLCR1_ADDR 			0x288
+#define PCTL_DLLCR2_ADDR 			0x28c
+#define PCTL_DLLCR3_ADDR 			0x290
+#define PCTL_DLLCR4_ADDR 			0x294
+#define PCTL_DLLCR5_ADDR 			0x298
+#define PCTL_DLLCR6_ADDR 			0x29c
+#define PCTL_DLLCR7_ADDR 			0x2a0
+#define PCTL_DLLCR8_ADDR 			0x2a4
+#define PCTL_DLLCR9_ADDR 			0x2a8
+#define PCTL_DQTR0_ADDR 			0x2c0
+#define PCTL_DQTR1_ADDR 			0x2c4
+#define PCTL_DQTR2_ADDR 			0x2c8
+#define PCTL_DQTR3_ADDR 			0x2cc
+#define PCTL_DQTR4_ADDR 			0x2d0
+#define PCTL_DQTR5_ADDR 			0x2d4
+#define PCTL_DQTR6_ADDR 			0x2d8
+#define PCTL_DQTR7_ADDR 			0x2dc
+#define PCTL_DQTR8_ADDR 			0x2e0
+#define PCTL_DQSTR_ADDR 			0x2e4
+#define PCTL_DQSNTR_ADDR 			0x2e8
+#define PCTL_PHYPVTCFG_ADDR 		0x300
+#define PCTL_PHYPVTSTAT_ADDR 		0x304
+#define PCTL_PHYTUPDON_ADDR 		0x308
+#define PCTL_PHYTUPDDLY_ADDR 		0x30c
+#define PCTL_PVTTUPDON_ADDR 		0x310
+#define PCTL_PVTTUPDDLY_ADDR 		0x314
+#define PCTL_PHYPVTUPDI_ADDR 		0x318
+#define PCTL_SCHCFG_ADDR 			0x380
+#define PCTL_IPVR_ADDR 				0x3f8
+#define PCTL_IPTR_ADDR 				0x3fc
+#define DWC_PCTL_BASE               0xd0040000
+#define P_PCTL_SCFG_ADDR                (DWC_PCTL_BASE+PCTL_SCFG_ADDR      )
+#define P_PCTL_SCTL_ADDR                (DWC_PCTL_BASE+PCTL_SCTL_ADDR      )
+#define P_PCTL_STAT_ADDR                (DWC_PCTL_BASE+PCTL_STAT_ADDR      )
+#define P_PCTL_MCMD_ADDR                (DWC_PCTL_BASE+PCTL_MCMD_ADDR      )
+#define P_PCTL_POWCTL_ADDR              (DWC_PCTL_BASE+PCTL_POWCTL_ADDR    )
+#define P_PCTL_POWSTAT_ADDR             (DWC_PCTL_BASE+PCTL_POWSTAT_ADDR   )
+#define P_PCTL_MCFG_ADDR                (DWC_PCTL_BASE+PCTL_MCFG_ADDR      )
+#define P_PCTL_PPCFG_ADDR               (DWC_PCTL_BASE+PCTL_PPCFG_ADDR     )
+#define P_PCTL_MSTAT_ADDR               (DWC_PCTL_BASE+PCTL_MSTAT_ADDR     )
+#define P_PCTL_ODTCFG_ADDR              (DWC_PCTL_BASE+PCTL_ODTCFG_ADDR    )
+#define P_PCTL_DQSECFG_ADDR             (DWC_PCTL_BASE+PCTL_DQSECFG_ADDR   )
+#define P_PCTL_DTUPDES_ADDR             (DWC_PCTL_BASE+PCTL_DTUPDES_ADDR   )
+#define P_PCTL_DTUNA_ADDR               (DWC_PCTL_BASE+PCTL_DTUNA_ADDR     )
+#define P_PCTL_DTUNE_ADDR               (DWC_PCTL_BASE+PCTL_DTUNE_ADDR     )
+#define P_PCTL_DTUPRD0_ADDR             (DWC_PCTL_BASE+PCTL_DTUPRD0_ADDR   )
+#define P_PCTL_DTUPRD1_ADDR             (DWC_PCTL_BASE+PCTL_DTUPRD1_ADDR   )
+#define P_PCTL_DTUPRD2_ADDR             (DWC_PCTL_BASE+PCTL_DTUPRD2_ADDR   )
+#define P_PCTL_DTUPRD3_ADDR             (DWC_PCTL_BASE+PCTL_DTUPRD3_ADDR   )
+#define P_PCTL_DTUAWDT_ADDR             (DWC_PCTL_BASE+PCTL_DTUAWDT_ADDR   )
+#define P_PCTL_TOGCNT1U_ADDR            (DWC_PCTL_BASE+PCTL_TOGCNT1U_ADDR  )
+#define P_PCTL_TINIT_ADDR               (DWC_PCTL_BASE+PCTL_TINIT_ADDR     )
+#define P_PCTL_TRSTH_ADDR               (DWC_PCTL_BASE+PCTL_TRSTH_ADDR     )
+#define P_PCTL_TOGCNT100N_ADDR          (DWC_PCTL_BASE+PCTL_TOGCNT100N_ADDR)
+#define P_PCTL_TREFI_ADDR               (DWC_PCTL_BASE+PCTL_TREFI_ADDR     )
+#define P_PCTL_TMRD_ADDR                (DWC_PCTL_BASE+PCTL_TMRD_ADDR      )
+#define P_PCTL_TRFC_ADDR                (DWC_PCTL_BASE+PCTL_TRFC_ADDR      )
+#define P_PCTL_TRP_ADDR                 (DWC_PCTL_BASE+PCTL_TRP_ADDR       )
+#define P_PCTL_TRTW_ADDR                (DWC_PCTL_BASE+PCTL_TRTW_ADDR      )
+#define P_PCTL_TAL_ADDR                 (DWC_PCTL_BASE+PCTL_TAL_ADDR       )
+#define P_PCTL_TCL_ADDR                 (DWC_PCTL_BASE+PCTL_TCL_ADDR       )
+#define P_PCTL_TCWL_ADDR                (DWC_PCTL_BASE+PCTL_TCWL_ADDR      )
+#define P_PCTL_TRAS_ADDR                (DWC_PCTL_BASE+PCTL_TRAS_ADDR      )
+#define P_PCTL_TRC_ADDR                 (DWC_PCTL_BASE+PCTL_TRC_ADDR       )
+#define P_PCTL_TRCD_ADDR                (DWC_PCTL_BASE+PCTL_TRCD_ADDR      )
+#define P_PCTL_TRRD_ADDR                (DWC_PCTL_BASE+PCTL_TRRD_ADDR      )
+#define P_PCTL_TRTP_ADDR                (DWC_PCTL_BASE+PCTL_TRTP_ADDR      )
+#define P_PCTL_TWR_ADDR                 (DWC_PCTL_BASE+PCTL_TWR_ADDR       )
+#define P_PCTL_TWTR_ADDR                (DWC_PCTL_BASE+PCTL_TWTR_ADDR      )
+#define P_PCTL_TEXSR_ADDR               (DWC_PCTL_BASE+PCTL_TEXSR_ADDR     )
+#define P_PCTL_TXP_ADDR                 (DWC_PCTL_BASE+PCTL_TXP_ADDR       )
+#define P_PCTL_TXPDLL_ADDR              (DWC_PCTL_BASE+PCTL_TXPDLL_ADDR    )
+#define P_PCTL_TZQCS_ADDR               (DWC_PCTL_BASE+PCTL_TZQCS_ADDR     )
+#define P_PCTL_TZQCSI_ADDR              (DWC_PCTL_BASE+PCTL_TZQCSI_ADDR    )
+#define P_PCTL_TDQS_ADDR                (DWC_PCTL_BASE+PCTL_TDQS_ADDR      )
+#define P_PCTL_TCKSRE_ADDR              (DWC_PCTL_BASE+PCTL_TCKSRE_ADDR    )
+#define P_PCTL_TCKSRX_ADDR              (DWC_PCTL_BASE+PCTL_TCKSRX_ADDR    )
+#define P_PCTL_TCKE_ADDR                (DWC_PCTL_BASE+PCTL_TCKE_ADDR      )
+#define P_PCTL_TMOD_ADDR                (DWC_PCTL_BASE+PCTL_TMOD_ADDR      )
+#define P_PCTL_TRSTL_ADDR               (DWC_PCTL_BASE+PCTL_TRSTL_ADDR     )
+#define P_PCTL_TZQCL_ADDR               (DWC_PCTL_BASE+PCTL_TZQCL_ADDR     )
+#define P_PCTL_DWLCFG0_ADDR             (DWC_PCTL_BASE+PCTL_DWLCFG0_ADDR   )
+#define P_PCTL_DWLCFG1_ADDR             (DWC_PCTL_BASE+PCTL_DWLCFG1_ADDR   )
+#define P_PCTL_DWLCFG2_ADDR             (DWC_PCTL_BASE+PCTL_DWLCFG2_ADDR   )
+#define P_PCTL_DWLCFG3_ADDR             (DWC_PCTL_BASE+PCTL_DWLCFG3_ADDR   )
+#define P_PCTL_ECCCFG_ADDR              (DWC_PCTL_BASE+PCTL_ECCCFG_ADDR    )
+#define P_PCTL_ECCTST_ADDR              (DWC_PCTL_BASE+PCTL_ECCTST_ADDR    )
+#define P_PCTL_ECCCLR_ADDR              (DWC_PCTL_BASE+PCTL_ECCCLR_ADDR    )
+#define P_PCTL_ECCLOG_ADDR              (DWC_PCTL_BASE+PCTL_ECCLOG_ADDR    )
+#define P_PCTL_ADDRMAP_ADDR             (DWC_PCTL_BASE+PCTL_ADDRMAP_ADDR   )
+#define P_PCTL_IDDEC0_ADDR              (DWC_PCTL_BASE+PCTL_IDDEC0_ADDR    )
+#define P_PCTL_IDDEC1_ADDR              (DWC_PCTL_BASE+PCTL_IDDEC1_ADDR    )
+#define P_PCTL_DTUWACTL_ADDR            (DWC_PCTL_BASE+PCTL_DTUWACTL_ADDR  )
+#define P_PCTL_DTURACTL_ADDR            (DWC_PCTL_BASE+PCTL_DTURACTL_ADDR  )
+#define P_PCTL_DTUCFG_ADDR              (DWC_PCTL_BASE+PCTL_DTUCFG_ADDR    )
+#define P_PCTL_DTUECTL_ADDR             (DWC_PCTL_BASE+PCTL_DTUECTL_ADDR   )
+#define P_PCTL_DTUWD0_ADDR              (DWC_PCTL_BASE+PCTL_DTUWD0_ADDR    )
+#define P_PCTL_DTUWD1_ADDR              (DWC_PCTL_BASE+PCTL_DTUWD1_ADDR    )
+#define P_PCTL_DTUWD2_ADDR              (DWC_PCTL_BASE+PCTL_DTUWD2_ADDR    )
+#define P_PCTL_DTUWD3_ADDR              (DWC_PCTL_BASE+PCTL_DTUWD3_ADDR    )
+#define P_PCTL_DTUWDM_ADDR              (DWC_PCTL_BASE+PCTL_DTUWDM_ADDR    )
+#define P_PCTL_DTURD0_ADDR              (DWC_PCTL_BASE+PCTL_DTURD0_ADDR    )
+#define P_PCTL_DTURD1_ADDR              (DWC_PCTL_BASE+PCTL_DTURD1_ADDR    )
+#define P_PCTL_DTURD2_ADDR              (DWC_PCTL_BASE+PCTL_DTURD2_ADDR    )
+#define P_PCTL_DTURD3_ADDR              (DWC_PCTL_BASE+PCTL_DTURD3_ADDR    )
+#define P_PCTL_DTULFSRWD_ADDR           (DWC_PCTL_BASE+PCTL_DTULFSRWD_ADDR )
+#define P_PCTL_DTULFSRRD_ADDR           (DWC_PCTL_BASE+PCTL_DTULFSRRD_ADDR )
+#define P_PCTL_DTUEAF_ADDR              (DWC_PCTL_BASE+PCTL_DTUEAF_ADDR    )
+#define P_PCTL_PHYCR_ADDR               (DWC_PCTL_BASE+PCTL_PHYCR_ADDR     )
+#define P_PCTL_PHYSR_ADDR               (DWC_PCTL_BASE+PCTL_PHYSR_ADDR     )
+#define P_PCTL_IOCR_ADDR                (DWC_PCTL_BASE+PCTL_IOCR_ADDR      )
+#define P_PCTL_RSLR0_ADDR               (DWC_PCTL_BASE+PCTL_RSLR0_ADDR     )
+#define P_PCTL_RSLR1_ADDR               (DWC_PCTL_BASE+PCTL_RSLR1_ADDR     )
+#define P_PCTL_RSLR2_ADDR               (DWC_PCTL_BASE+PCTL_RSLR2_ADDR     )
+#define P_PCTL_RSLR3_ADDR               (DWC_PCTL_BASE+PCTL_RSLR3_ADDR     )
+#define P_PCTL_RDGR0_ADDR               (DWC_PCTL_BASE+PCTL_RDGR0_ADDR     )
+#define P_PCTL_RDGR1_ADDR               (DWC_PCTL_BASE+PCTL_RDGR1_ADDR     )
+#define P_PCTL_RDGR2_ADDR               (DWC_PCTL_BASE+PCTL_RDGR2_ADDR     )
+#define P_PCTL_RDGR3_ADDR               (DWC_PCTL_BASE+PCTL_RDGR3_ADDR     )
+#define P_PCTL_ZQCR_ADDR                (DWC_PCTL_BASE+PCTL_ZQCR_ADDR      )
+#define P_PCTL_ZQSR_ADDR                (DWC_PCTL_BASE+PCTL_ZQSR_ADDR      )
+#define P_PCTL_DLLCR_ADDR               (DWC_PCTL_BASE+PCTL_DLLCR_ADDR     )
+#define P_PCTL_DLLCR0_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR0_ADDR    )
+#define P_PCTL_DLLCR1_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR1_ADDR    )
+#define P_PCTL_DLLCR2_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR2_ADDR    )
+#define P_PCTL_DLLCR3_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR3_ADDR    )
+#define P_PCTL_DLLCR4_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR4_ADDR    )
+#define P_PCTL_DLLCR5_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR5_ADDR    )
+#define P_PCTL_DLLCR6_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR6_ADDR    )
+#define P_PCTL_DLLCR7_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR7_ADDR    )
+#define P_PCTL_DLLCR8_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR8_ADDR    )
+#define P_PCTL_DLLCR9_ADDR              (DWC_PCTL_BASE+PCTL_DLLCR9_ADDR    )
+#define P_PCTL_DQTR0_ADDR               (DWC_PCTL_BASE+PCTL_DQTR0_ADDR     )
+#define P_PCTL_DQTR1_ADDR               (DWC_PCTL_BASE+PCTL_DQTR1_ADDR     )
+#define P_PCTL_DQTR2_ADDR               (DWC_PCTL_BASE+PCTL_DQTR2_ADDR     )
+#define P_PCTL_DQTR3_ADDR               (DWC_PCTL_BASE+PCTL_DQTR3_ADDR     )
+#define P_PCTL_DQTR4_ADDR               (DWC_PCTL_BASE+PCTL_DQTR4_ADDR     )
+#define P_PCTL_DQTR5_ADDR               (DWC_PCTL_BASE+PCTL_DQTR5_ADDR     )
+#define P_PCTL_DQTR6_ADDR               (DWC_PCTL_BASE+PCTL_DQTR6_ADDR     )
+#define P_PCTL_DQTR7_ADDR               (DWC_PCTL_BASE+PCTL_DQTR7_ADDR     )
+#define P_PCTL_DQTR8_ADDR               (DWC_PCTL_BASE+PCTL_DQTR8_ADDR     )
+#define P_PCTL_DQSTR_ADDR               (DWC_PCTL_BASE+PCTL_DQSTR_ADDR     )
+#define P_PCTL_DQSNTR_ADDR              (DWC_PCTL_BASE+PCTL_DQSNTR_ADDR    )
+#define P_PCTL_PHYPVTCFG_ADDR           (DWC_PCTL_BASE+PCTL_PHYPVTCFG_ADDR )
+#define P_PCTL_PHYPVTSTAT_ADDR          (DWC_PCTL_BASE+PCTL_PHYPVTSTAT_ADDR)
+#define P_PCTL_PHYTUPDON_ADDR           (DWC_PCTL_BASE+PCTL_PHYTUPDON_ADDR )
+#define P_PCTL_PHYTUPDDLY_ADDR          (DWC_PCTL_BASE+PCTL_PHYTUPDDLY_ADDR)
+#define P_PCTL_PVTTUPDON_ADDR           (DWC_PCTL_BASE+PCTL_PVTTUPDON_ADDR )
+#define P_PCTL_PVTTUPDDLY_ADDR          (DWC_PCTL_BASE+PCTL_PVTTUPDDLY_ADDR)
+#define P_PCTL_PHYPVTUPDI_ADDR          (DWC_PCTL_BASE+PCTL_PHYPVTUPDI_ADDR)
+#define P_PCTL_SCHCFG_ADDR              (DWC_PCTL_BASE+PCTL_SCHCFG_ADDR    )
+#define P_PCTL_IPVR_ADDR                (DWC_PCTL_BASE+PCTL_IPVR_ADDR      )
+#define P_PCTL_IPTR_ADDR                (DWC_PCTL_BASE+PCTL_IPTR_ADDR      )
+#endif
