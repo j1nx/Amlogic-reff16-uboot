@@ -203,9 +203,6 @@ $(obj)uclpack$(SFX): $(obj)uclpack.o $(LIBUCL_FILE)
 $(obj)bin2code$(SFX): $(obj)bin2code.o
 	$(HOSTCC) -g $(HOSTCFLAGS) $(HOSTLDFLAGS) -o $@ $^
 
-$(LIBUCL_FILE):
-	make -C ucl/ucl_cygwin_prj
-		
 # Some of the tool objects need to be accessed from outside the tools directory
 $(obj)%.o: $(SRCTREE)/common/%.c
 	$(HOSTCC) -g $(HOSTCFLAGS_NOPED) -c -o $@ $<
