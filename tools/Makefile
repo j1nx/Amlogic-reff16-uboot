@@ -104,7 +104,7 @@ LIBFDT_OBJ_FILES-y += fdt_ro.o
 LIBFDT_OBJ_FILES-y += fdt_rw.o
 LIBFDT_OBJ_FILES-y += fdt_strerror.o
 LIBFDT_OBJ_FILES-y += fdt_wip.o
-LIBUCL_FILE=$(obj)ucl_linux/libucl_linux.a
+LIBUCL_FILE = $(SRCTREE)/tools/ucl/libucl_linux.lib
 # Generated LCD/video logo
 LOGO_H = $(OBJTREE)/include/bmp_logo.h
 LOGO-$(CONFIG_LCD_LOGO) += $(LOGO_H)
