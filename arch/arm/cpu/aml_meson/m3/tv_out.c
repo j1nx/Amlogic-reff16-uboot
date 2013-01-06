@@ -182,6 +182,9 @@ static int tvoutc_setclk(int mode)
 		case TVOUT_720P:
 		case TVOUT_1080I:
 		case TVOUT_1080P:
+        case TVOUT_720P50HZ:
+        case TVOUT_1080I50HZ:
+        case TVOUT_1080P50HZ:
 			  setreg(&hd[xtal]);
 			  if(xtal == 1)
 			  {

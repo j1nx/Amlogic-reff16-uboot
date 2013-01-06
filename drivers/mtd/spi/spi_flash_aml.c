@@ -205,7 +205,11 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 			idcode[1], idcode[2]);
 
 	switch (idcode[0]) {
-
+#ifdef CONFIG_SPI_FLASH_ESMT
+    case 0x8c:
+        flash = spi_flash_probe_esmt(spi, idcode);
+        break;
+#endif
 #ifdef CONFIG_SPI_FLASH_MACRONIX
 	case 0xc2:
 		flash=spi_flash_probe_mxic(spi,idcode);
@@ -216,7 +220,6 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 		flash=spi_flash_probe_sst(spi,idcode);
 		break;
 #endif
-
 #ifdef CONFIG_SPI_FLASH_SPANSION
 	case 0x01:
 		flash = spi_flash_probe_spansion(spi, idcode);

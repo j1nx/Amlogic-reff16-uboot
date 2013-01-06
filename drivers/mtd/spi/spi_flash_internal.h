@@ -48,6 +48,7 @@ struct spi_flash *spi_flash_probe_macronix(struct spi_slave *spi, u8 *idcode);
 struct spi_flash *spi_flash_probe_sst(struct spi_slave *spi, u8 *idcode);
 struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 *idcode);
 struct spi_flash *spi_flash_probe_winbond(struct spi_slave *spi, u8 *idcode);
+struct spi_flash *spi_flash_probe_esmt(struct spi_slave *spi, u8 *idcode);
 /*-----------------------------------------------------------------------
  * Write 8 bits, then read 8 bits.
  *   slave:	The SPI slave we're communicating with

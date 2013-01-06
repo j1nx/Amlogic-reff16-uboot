@@ -437,10 +437,10 @@ struct aml_nand_bch_desc{
 //for SAMSUNG
 #define	SUMSUNG_2XNM 			30	
 
-//for SANDISK
-#define      SANDISK_19NM			40
+#define   MICRON_20NM			40
 
-#define      MICRON_20NM			10
+//for SANDISK
+#define    SANDISK_19NM			50
 
 #define      DYNAMIC_REG_NUM        3
 #define      DYNAMIC_REG_INIT_NUM        9

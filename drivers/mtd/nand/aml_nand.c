@@ -1266,7 +1266,7 @@ void aml_nand_set_reg_default_hynix(void)
 {
 	struct mtd_info *mtd = nand_info[nand_curr_device];
 
-		if(strcmp(mtd->name,NAND_BOOT_NAME)){
+		if(!strcmp(mtd->name,NAND_BOOT_NAME)){
 #ifdef NEW_NAND_SUPPORT
 	//if(mtd){
 		aml_nand_set_readretry_default_value_hynix(mtd);
@@ -2026,7 +2026,7 @@ static int aml_nand_wait(struct mtd_info *mtd, struct nand_chip *chip)
 {
 	struct aml_nand_chip *aml_chip = mtd_to_nand_chip(mtd);
 	int status[MAX_CHIP_NUM], state = chip->state, i = 0, time_cnt = 0;
-
+	struct aml_nand_platform *plat = aml_chip->platform; 
 	/* Apply this short delay always to ensure that we do wait tWB in
 	 * any case on any machine. */
 	ndelay(100);
@@ -2065,7 +2065,8 @@ static int aml_nand_wait(struct mtd_info *mtd, struct nand_chip *chip)
 			status[0] |= status[i];
 		}
 	}
-
+     if (!strncmp((char*)plat->name, NAND_BOOT_NAME, strlen((const char*)NAND_BOOT_NAME)))
+         status[0] = 0xe0;
 	return status[0];
 }
 /*

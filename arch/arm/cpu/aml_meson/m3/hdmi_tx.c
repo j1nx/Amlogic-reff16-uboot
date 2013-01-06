@@ -182,10 +182,10 @@ static  int  set_disp_mode(const char *mode)
     int ret=-1;
    char  mode_name[][16]=
    {
-   	"480i","480i","480p","576i","576i","576p","720p","1080i","1080p","invalid"	
+   	"480i","480i","480p","576i","576i","576p","720p","1080i","1080p","720p50hz","1080i50hz","1080p50hz","invalid"	
    };
     HDMI_Video_Codes_t vic;
-    if(mode>=9)
+    if(mode>=12)
     {
     	printf("invalid tvout mode \n");
 	return -1;

@@ -29,6 +29,7 @@
 #define CONFIG_SPI_FLASH_SST        1
 //#define CONFIG_SPI_FLASH_STMICRO    1
 #define CONFIG_SPI_FLASH_WINBOND    1
+#define CONFIG_SPI_FLASH_ESMT        1
 #define CONFIG_SPI_FLASH_GIGABYTE    1
 /** support nand flash **/
 #define CONFIG_CMD_NAND       		1 //@todo move it to Config ?

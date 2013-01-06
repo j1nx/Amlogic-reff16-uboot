@@ -797,6 +797,21 @@ static int get_tv_mode(char *mode_name)
        scan_mode = 0; // SCAN_MODE_INTERLACE;
 		return TVOUT_480I;
 	}
+    if((strcmp(mode_name, "720P50HZ")==0) || (strcmp(mode_name, "720p50hz")==0))
+	{
+       scan_mode = 1; // SCAN_MODE_PROGRESSIVE;
+		return TVOUT_720P50HZ;
+	}
+    if((strcmp(mode_name, "1080I50HZ")==0) || (strcmp(mode_name, "1080i50hz")==0))
+	{
+       scan_mode = 0; // SCAN_MODE_INTERLACE;
+		return TVOUT_1080I50HZ;
+	}
+    if((strcmp(mode_name, "1080P50HZ")==0) || (strcmp(mode_name, "1080p50hz")==0))
+	{
+       scan_mode = 1; // SCAN_MODE_PROGRESSIVE;
+	   return TVOUT_1080P50HZ;
+	}
 	return TVOUT_MAX;
 }
 

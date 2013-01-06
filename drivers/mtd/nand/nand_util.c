@@ -197,7 +197,7 @@ int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts)
 	
 		WATCHDOG_RESET ();
 
-		if ((opts->scrub ==2) && bbtest) {
+		if (((!opts->scrub)||(opts->scrub == 2)) && bbtest) {
 			int ret = meminfo->block_isbad(meminfo, erase.addr);
 			if (ret > 0) {
 				if (!opts->quiet)

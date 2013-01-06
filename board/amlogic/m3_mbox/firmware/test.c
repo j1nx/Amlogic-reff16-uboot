@@ -8,7 +8,35 @@
 #include <asm/arch/memtest.h>
 #include <asm/arch/pctl.h>
 #include "boot_code.c"
+#include <asm/arch/cec_tx_reg.h>
 #include "irremote2arc.c"
+//unsigned long    clk_util_clk_msr_1(unsigned long   clk_mux)
+//{
+//    unsigned long   measured_val;
+//    unsigned long   uS_gate_time=64;
+//    writel(0,P_MSR_CLK_REG0);
+//    // Set the measurement gate to 64uS
+//    clrsetbits_le32(P_MSR_CLK_REG0,0xffff,(uS_gate_time-1));
+//    // Disable continuous measurement
+//    // disable interrupts
+//    clrbits_le32(P_MSR_CLK_REG0,(1 << 18) | (1 << 17));
+////    Wr(MSR_CLK_REG0, (Rd(MSR_CLK_REG0) & ~((1 << 18) | (1 << 17))) );
+//    clrsetbits_le32(P_MSR_CLK_REG0,
+//        (0xf << 20)|(1<<19)|(1<<16),
+//        (clk_mux<<20) |(1<<19)|(1<<16));
+//    { unsigned long dummy_rd = readl(P_MSR_CLK_REG0); }
+//    // Wait for the measurement to be done
+//    while( (readl(P_MSR_CLK_REG0) & (1 << 31)) ) {} 
+//    // disable measuring
+//    clrbits_le32(P_MSR_CLK_REG0, 1<<16 );
+//
+//    measured_val = readl(P_MSR_CLK_REG2)&0x000FFFFF;
+//    // Return value in Hz*measured_val
+//    // Return Mhz
+//    return (measured_val>>6);
+//    // Return value in Hz*measured_val
+//}
+
 //----------------------------------------------------
 unsigned UART_CONFIG_24M= (200000000/(115200*4)  );
 unsigned UART_CONFIG= (32*1000/(300*4));
@@ -149,7 +177,48 @@ void enter_power_down()
 	//*******************************************
 
 	f_serial_puts("\n");
-	
+	f_serial_puts("cec\n");
+	hdmi_cec_func_config = readl(P_AO_DEBUG_REG0);
+    f_serial_puts("CEC uboot:hdmi_cec_func_config:\n");
+    serial_put_hex(hdmi_cec_func_config,32);
+    f_serial_puts("\n");	
+    //f_serial_puts("CEC P_AO_DEBUG_REG0:\n");
+    //serial_put_hex(readl(P_AO_DEBUG_REG0),32);
+    //f_serial_puts("\n");   
+    //f_serial_puts("CEC P_AO_DEBUG_REG1:\n");
+    //serial_put_hex(readl(P_AO_DEBUG_REG1),32);          
+    //f_serial_puts("\n");
+    //if(hdmi_cec_func_config & 0x1){
+    //    f_serial_puts("CEC P_PERIPHS_PIN_MUX_1:\n");
+    //    //writel((readl(P_PERIPHS_PIN_MUX_1) | (1<<25)), P_PERIPHS_PIN_MUX_1);
+    //    serial_put_hex(readl(P_PERIPHS_PIN_MUX_1),32);          
+    //    f_serial_puts("\n");
+    //    cec_power_on();
+    //    remote_cec_hw_reset();  
+    //    cec_node_init();
+    //    f_serial_puts("CEC CEC_LOGICAL_ADDR0:\n");      
+    //    serial_put_hex(cec_rd_reg(CEC0_BASE_ADDR+CEC_LOGICAL_ADDR0),32);
+    //    f_serial_puts("\n");
+    //    f_serial_puts("CEC CEC_CLOCK_DIV_L:\n");      
+    //    serial_put_hex(cec_rd_reg(CEC0_BASE_ADDR+CEC_CLOCK_DIV_L),32);
+    //    f_serial_puts("\n");
+    //    f_serial_puts("CEC CTS_HDMI_SYS_CLK:\n");      
+    //    serial_put_hex(clk_util_clk_msr_1(19),32);
+    //    f_serial_puts("\n");
+    //    f_serial_puts("CEC readl(P_HHI_GCLK_MPEG0):\n");      
+    //    serial_put_hex(readl(P_HHI_GCLK_MPEG0),32);
+    //    f_serial_puts("\n");
+    //    f_serial_puts("CEC readl(P_HHI_GCLK_MPEG1):\n");      
+    //    serial_put_hex(readl(P_HHI_GCLK_MPEG1),32);
+    //    f_serial_puts("\n");
+    //    f_serial_puts("CEC readl(P_HHI_GCLK_MPEG2):\n");      
+    //    serial_put_hex(readl(P_HHI_GCLK_MPEG2),32);
+    //    f_serial_puts("\n");
+    //    f_serial_puts("CEC readl(P_HHI_GCLK_OTHER):\n");      
+    //    serial_put_hex(readl(P_HHI_GCLK_OTHER),32);
+    //    f_serial_puts("\n");
+    //}
+
 	wait_uart_empty();
 
 	// disable jtag
@@ -189,10 +258,11 @@ void enter_power_down()
 	clrbits_le32(P_HHI_SYS_CPU_CLK_CNTL, 1<<5); // disable AT_CLK
 	setbits_le32(P_HHI_SYS_CPU_CLK_CNTL,1<<19);
 	udelay(10);
-	 
+
 	// enable iso ee for A9
 	writel(readl(P_AO_RTI_PWR_CNTL_REG0)&(~(1<<4)),P_AO_RTI_PWR_CNTL_REG0);
 	udelay(1000);
+
 	
 #ifdef POWER_OFF_HDMI_VCC
 	reg7_off();
@@ -230,15 +300,16 @@ void enter_power_down()
     writel(readl(P_AO_RTI_PWR_CNTL_REG0)|(1<<8),P_AO_RTI_PWR_CNTL_REG0);
     udelay(100);
 #ifdef POWER_OFF_VDDIO 
-	vddio_off(); 
+	vddio_off();
 #endif		
 #ifdef POWER_OFF_AVDD25
 	reg6_off();
 #endif
+    if(!(hdmi_cec_func_config & 0x1)){//for cec wake up
 #ifdef POWER_OFF_VCC
     power_off_VCC(0);
 #endif
-
+    }
 	udelay(100);
 #if (defined(POWER_DOWN_VCC12) || defined(POWER_DOWN_DDR))
 	switch_voltage(1);
@@ -261,17 +332,33 @@ void enter_power_down()
     init_custom_trigger();
 
     #ifdef RESUME_BY_GPIO_KEY
+
     //set the detect gpio
     setbits_le32(P_AO_GPIO_O_EN_N,(1<<3));
     #endif
+    if(hdmi_cec_func_config & 0x1){    
+        /*cec wake up*/
+        cec_power_on();
+        remote_cec_hw_reset();  
+        cec_node_init();
+    }
+    
     while(1)
     {
     	//detect remote key
+        if((readl(P_AO_IR_DEC_STATUS)>>3)&0x1 == 0x1)
+        {
 		  power_key=readl(P_AO_IR_DEC_FRAME);
 		  power_key = (power_key>>16)&0xff;
 		  if(power_key==0x1a)  //the reference remote power key code
-        break;
-
+                  break;
+        }
+        if(hdmi_cec_func_config & 0x1){
+            cec_handler();	
+            if(cec_msg.cec_power == 0x1){  //cec power key
+                break;
+            }
+        }
 		 #ifdef RESUME_BY_GPIO_KEY
 		  //detect IO key
 		  power_key=readl(P_AO_GPIO_I); 
@@ -289,7 +376,9 @@ void enter_power_down()
 		 #endif
 		  
 	  }
-	  
+	if(hdmi_cec_func_config & 0x1){
+	   remote_cec_hw_off(); 
+	} 
     #elif 1
     power_key = readl(0Xc8100744);
     while (((power_key&4) != 0)&&((power_key&8) == 0))
@@ -446,7 +535,23 @@ void enter_power_down()
 	
 	//reset the IR REMOTE
 	resume_remote_register();
-  
+	//if(hdmi_cec_func_config & 0x1){
+    //f_serial_puts("CEC P_AO_DEBUG_REG0:\n");
+    //serial_put_hex(readl(P_AO_DEBUG_REG0),32);
+    //f_serial_puts("\n");   
+    //f_serial_puts("CEC P_AO_DEBUG_REG1:\n");
+    //serial_put_hex(readl(P_AO_DEBUG_REG1),32);          
+    //f_serial_puts("\n");
+    //f_serial_puts("CEC P_PERIPHS_PIN_MUX_1:\n");
+    //serial_put_hex(readl(P_PERIPHS_PIN_MUX_1),32);          
+    //f_serial_puts("\n");  
+    //f_serial_puts("CEC CEC_LOGICAL_ADDR0:\n");      
+    //serial_put_hex(cec_rd_reg(CEC0_BASE_ADDR+CEC_LOGICAL_ADDR0),32);
+    //f_serial_puts("\n");
+    f_serial_puts("CEC cec_msg.test:\n");      
+    serial_put_hex(cec_msg.test,32);
+    f_serial_puts("\n");
+    //} 
 //	delay_1s();
 //	delay_1s();
 //	delay_1s();

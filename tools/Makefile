@@ -104,7 +104,7 @@ LIBFDT_OBJ_FILES-y += fdt_ro.o
 LIBFDT_OBJ_FILES-y += fdt_rw.o
 LIBFDT_OBJ_FILES-y += fdt_strerror.o
 LIBFDT_OBJ_FILES-y += fdt_wip.o
-LIBUCL_FILE = $(SRCTREE)/tools/ucl/libucl_linux.lib
+LIBUCL_FILE=$(obj)ucl_linux/libucl_linux.a
 # Generated LCD/video logo
 LOGO_H = $(OBJTREE)/include/bmp_logo.h
 LOGO-$(CONFIG_LCD_LOGO) += $(LOGO_H)
@@ -203,6 +203,9 @@ $(obj)uclpack$(SFX): $(obj)uclpack.o $(LIBUCL_FILE)
 $(obj)bin2code$(SFX): $(obj)bin2code.o
 	$(HOSTCC) -g $(HOSTCFLAGS) $(HOSTLDFLAGS) -o $@ $^
 
+$(LIBUCL_FILE):
+	make -C ucl/ucl_cygwin_prj
+		
 # Some of the tool objects need to be accessed from outside the tools directory
 $(obj)%.o: $(SRCTREE)/common/%.c
 	$(HOSTCC) -g $(HOSTCFLAGS_NOPED) -c -o $@ $<

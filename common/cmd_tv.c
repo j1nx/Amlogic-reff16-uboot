@@ -32,6 +32,12 @@ static int to_mode(char *mode_name)
 		return TVOUT_576I;
 	if((strcmp(mode_name, "480I")==0) || (strcmp(mode_name, "480i")==0))
 		return TVOUT_480I;
+    if((strcmp(mode_name, "720p50hz")==0) || (strcmp(mode_name, "720P50HZ")==0))
+        return TVOUT_720P50HZ;
+    if((strcmp(mode_name, "1080i50hz")==0) || (strcmp(mode_name, "1080I50HZ")==0))
+        return TVOUT_1080I50HZ;
+    if((strcmp(mode_name, "1080p50hz")==0) || (strcmp(mode_name, "1080P50HZ")==0))
+        return TVOUT_1080P50HZ;
 
 	return TVOUT_MAX;
 }
@@ -49,6 +55,9 @@ static char * to_modestr(int mode)
 		CASE_RET(480P);
 		CASE_RET(576I);
 		CASE_RET(480I);
+        CASE_RET(720P50HZ);
+        CASE_RET(1080I50HZ);
+        CASE_RET(1080P50HZ);
 	}
 	return "UNKNOWN";
 }
@@ -71,7 +80,7 @@ static int do_tv_out_open(int argc, char *argv[])
 		return 1;
 	}
 
-	if(mode==TVOUT_1080I||mode==TVOUT_576I||mode==TVOUT_480I){
+	if(mode==TVOUT_1080I50HZ||mode==TVOUT_1080I||mode==TVOUT_576I||mode==TVOUT_480I){
 		udelay(3*1000*1000);
 		start_dsp();
 	}

@@ -13,6 +13,9 @@ enum
     TVOUT_720P  ,
     TVOUT_1080I ,
     TVOUT_1080P ,
+    TVOUT_720P50HZ,
+    TVOUT_1080I50HZ,
+    TVOUT_1080P50HZ,
     TVOUT_MAX   
 };
 
